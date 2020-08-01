@@ -260,8 +260,10 @@ nav ul li a {
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 10px;
+  margin-right: auto;
   text-transform: uppercase;
   color: #fff;
+  background-color: black;
 }
 
 .header-content p {
@@ -269,8 +271,10 @@ nav ul li a {
   letter-spacing: 5px;
   margin-top: 0;
   margin-bottom: 30px;
+  margin-right: auto;
   text-transform: capitalize;
   color: #fff;
+  background-color: black;
   font-weight: 500;
 }
 
