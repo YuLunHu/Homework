@@ -1,0 +1,30 @@
+1. 查詢在2020-08-08的訂單中有訂茶之軒的訂單訂了哪些品項、單價及數量:
+
+Select X.orderID, X.OrderDate, R.restaurantName, F.FoodName, F.UnitPrice, X.Quantity From
+(
+Select OD.OrderDetlsID, O.OrderID, OD.FoodID, OD.Quantity, O.OrderDate From `order details` as OD
+Join orders as O
+on OD.orderID = O.orderID
+where OrderDate Like '2020-08-08%'
+) as X
+JOIN restaurant as R
+Join food as F
+On X.foodID = F.foodID
+where R.restaurantName = '茶之軒';
+
+2. 查詢所有吃過香菇雞肉飯的人名字、訂單編號、數量以及訂單日期。
+
+SELECT M.Name, A.OrderID, A.Quantity, A.OrderDate FROM (
+    SELECT Z.OrderID, Z.Quantity, O.MemberID, O.OrderDate FROM (
+        SELECT OD.OrderID, OD.Quantity FROM (
+            SELECT * FROM food as F 
+            WHERE F.FoodName = '香菇雞肉飯'
+        ) as X
+        JOIN `order details` AS OD
+        ON OD.FoodID = X.FoodID
+    ) as Z
+    JOIN orders as O
+    on Z.OrderID = O.OrderID
+) as A
+JOIN member as M 
+ON A.MemberID = M.MemberID
