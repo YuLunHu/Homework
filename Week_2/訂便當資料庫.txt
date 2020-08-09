@@ -1,0 +1,72 @@
+create database DinbentoDB default character set utf8;
+
+use DinbentoDB;
+
+--
+--
+
+CREATE TABLE restaurant (
+  restaurantID int(7) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  restaurantName varchar(30) NOT NULL default '',
+  Phone varchar(20) default NULL, 
+  Address varchar(50) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO restaurant VALUES (1, '麵屋五藏','0424630355','台中市西屯區台灣大道四段1038號2樓');
+INSERT INTO restaurant VALUES (2, '茶之軒','0423588736','台中市西屯區中工三路178號');
+
+--
+
+CREATE TABLE food (
+  FoodID int(7) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  restaurantID int(7) NOT NULL,
+  FoodName varchar(30) NOT NULL default '',
+  UnitPrice int(4) default NULL,
+  FOREIGN KEY (restaurantID) REFERENCES restaurant(restaurantID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO food VALUES (1, 1, '味玉雞白湯拉麵', 250);
+INSERT INTO food VALUES (2, 1, '魚介雞沾麵', 240);
+INSERT INTO food VALUES (3, 2, '香菇雞肉飯', 80);
+INSERT INTO food VALUES (4, 2, '咖哩豬肉飯', 75);
+
+--
+
+CREATE TABLE member (
+  MemberID int(7) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  Name varchar(20) NOT NULL default '',
+  Phone varchar(20) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO member VALUES (1, 'YuLun', '0935286806');
+INSERT INTO member VALUES (2, 'ChiaChia', '0945392765');
+INSERT INTO member VALUES (3, 'Tatis', '0987542987');
+
+--
+
+CREATE TABLE orders (
+  OrderID int(21) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  MemberID int(7) NOT NULL,
+  OrderDate datetime default NULL,
+  FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO orders VALUES (1, 1, '2020-08-08 08:08:08');
+INSERT INTO orders VALUES (2, 2, '2020-08-09 08:18:08');
+INSERT INTO orders VALUES (3, 1, '2020-08-09 08:54:08');
+--
+
+CREATE TABLE `order details` (
+    OrderDetlsID int(25) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    OrderID int(21) NOT NULL,
+    FoodID int(7) NOT NULL,
+    Quantity smallint(6) NOT NULL default '0',
+    FOREIGN KEY (OrderID) REFERENCES orders(OrderID),
+    FOREIGN KEY (FoodID) REFERENCES food(FoodID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `order details` VALUES (1, 1, 2, 1);
+INSERT INTO `order details` VALUES (2, 2, 3, 1);
+INSERT INTO `order details` VALUES (3, 2, 4, 2);
+
+--
