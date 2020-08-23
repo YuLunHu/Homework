@@ -12,26 +12,29 @@ else
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Lab - index</title>
+<link href="style.css" rel="stylesheet">
+<title>首頁</title>
 </head>
 <body>
 
-<table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
+<table width="300" border="0" align="center" cellpadding="7" cellspacing="0" bgcolor="#ffffff">
   <tr>
-    <td align="center" bgcolor="#CCCCCC"><font color="#FFFFFF">會員系統 - 首頁</font></td>
+    <td class="title" align="center" bgcolor="#CCCCCC">會員系統 - 首頁</font></td>
   </tr>
   <tr>
 
   <?php if ($UserName == "Guest") { ?>
-    <td align="center" valign="baseline"><a href="login.php">登入</a> 
+    <td align="center" valign="baseline">
+      <input class="button button1" type="button" onclick="javascript:location.href='login.php'" value="登入"></input>
   <?php } else { ?>
-    <td align="center" valign="baseline"><a href="login.php?logout=1">登出</a>
+    <td  align="center" valign="baseline">
+      <input class="button button1" type="button" onclick="javascript:location.href='login.php?logout=1'" value="登出"></input>
   <?php } ?>
-    | <a href="secret.php">會員專用頁</a></td>
+    | <input class="button button1" type="button" onclick="javascript:location.href='secret.php'" value="會員專用頁"></input>
 
   </tr>
   <tr>
-    <td align="center" bgcolor="#CCCCCC"><?php echo "Welcome! " . $UserName ?></td>
+    <td class="welcome" align="center" bgcolor="#CCCCCC"><?php echo "Welcome! " . $UserName ?></td>
   </tr>
   
 </table>
